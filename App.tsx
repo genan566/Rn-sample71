@@ -32,6 +32,7 @@ function App() {
     <NavigationContainer>
       <Tab.Navigator>
         <Drawer.Screen name="Feed" component={Feed} />
+        <Drawer.Screen name="dgg" component={Feed} />
         <Drawer.Screen name="Article" component={Article} />
       </Tab.Navigator>
     </NavigationContainer>
