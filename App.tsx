@@ -9,8 +9,8 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import PushNotification from "react-native-push-notification";
 
 const Drawer = createDrawerNavigator();
-// const Tab = createBottomTabNavigator();
-const Tab = createMaterialTopTabNavigator();
+const Tab = createBottomTabNavigator();
+// const Tab = createMaterialTopTabNavigator();
 
 const Feed = () => {
   return (
