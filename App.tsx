@@ -4,9 +4,11 @@ import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 const Feed = () => {
   return (
