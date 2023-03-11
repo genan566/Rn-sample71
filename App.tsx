@@ -3,8 +3,10 @@ import React from 'react'
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 const Feed = () => {
   return (
@@ -26,10 +28,10 @@ function App() {
   return (
 
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Tab.Navigator>
         <Drawer.Screen name="Feed" component={Feed} />
         <Drawer.Screen name="Article" component={Article} />
-      </Drawer.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
     // <Text>sdfjh</Text>
   );
