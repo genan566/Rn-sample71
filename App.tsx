@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native'
+import { View, Text, Pressable } from 'react-native'
 import React from 'react'
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+import PushNotification from "react-native-push-notification";
 
 const Drawer = createDrawerNavigator();
 // const Tab = createBottomTabNavigator();
@@ -19,14 +21,43 @@ const Feed = () => {
 }
 
 const Article = () => {
+
+  const handleNotification = () => {
+    PushNotification.localNotification({
+      channelId: "test-channel",
+      message: 'Ouais',
+      title: "Test Notification"
+    })
+  }
   return (
     <View>
-      <Text>Article</Text>
+      <Pressable
+        onPress={() => {
+          handleNotification()
+        }}
+      >
+        <Text>Article</Text>
+      </Pressable>
     </View>
   )
 }
 
 function App() {
+  const createChannel = () => {
+    PushNotification.createChannel(
+      {
+        channelId: "test-channel",
+        channelName: "Test Channel",
+      }, (created) => {
+        console.log("Created", created)
+      }
+    )
+  }
+
+  React.useEffect(() => {
+    createChannel()
+  }, [])
+
   return (
 
     <NavigationContainer>
