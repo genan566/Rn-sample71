@@ -24,6 +24,7 @@
     "react": "18.2.0",
     "react-native": "0.71.4",
     "react-native-gesture-handler": "^2.9.0",
+    "react-native-image-picker": "^5.1.0",
     "react-native-pager-view": "^6.1.4",
     "react-native-push-notification": "^8.1.1",
     "react-native-reanimated": "^3.0.2",
@@ -31,7 +32,8 @@
     "react-native-screens": "^3.20.0",
     "react-native-svg": "^13.8.0",
     "react-native-tab-view": "^3.5.1",
-    "react-native-toast-message": "^2.1.6"
+    "react-native-toast-message": "^2.1.6",
+    "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
@@ -42,6 +44,7 @@
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.24",
     "@types/react-native-push-notification": "^8.1.1",
+    "@types/react-native-vector-icons": "^6.4.13",
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.2.1",
     "eslint": "^8.19.0",
