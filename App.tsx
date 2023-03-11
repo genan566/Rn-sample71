@@ -10,57 +10,15 @@ import PushNotification from "react-native-push-notification";
 import { ApplicationProvider, Icon, IconRegistry } from '@ui-kitten/components';
 import IconAwesome5 from 'react-native-vector-icons/FontAwesome';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import PhotoScreen from './screens/PhotoScreen';
+import CalculatorScreen from './screens/Calculator';
+import TextScreen from './screens/TextScreen';
+import NotificationScreen from './screens/NotificationScreen';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 // const Tab = createMaterialTopTabNavigator();
-
-const NotificationScreen = () => {
-  return (
-    <View>
-      <Text>NotificationScreen</Text>
-    </View>
-  )
-}
-
-const TextScreen = () => {
-  return (
-    <View>
-      <Text>TextScreen</Text>
-    </View>
-  )
-}
-
-const CalculatorScreen = () => {
-  return (
-    <View>
-      <Text>CalculatorScreen</Text>
-    </View>
-  )
-}
-
-const PhotoScreen = () => {
-
-  const handleNotification = () => {
-    PushNotification.localNotification({
-      channelId: "test-channel",
-      message: 'Ouais',
-      title: "Test Notification"
-    })
-  }
-  return (
-    <View>
-      <Pressable
-        onPress={() => {
-          handleNotification()
-        }}
-      >
-        <Text>PhotoScreen</Text>
-      </Pressable>
-    </View>
-  )
-}
 
 function App() {
   const createChannel = () => {
