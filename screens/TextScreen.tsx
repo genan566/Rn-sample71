@@ -1,11 +1,12 @@
-import { View } from "react-native"
+import { SafeAreaView, View } from "react-native"
 import { Text } from "react-native"
 
 const TextScreen = () => {
+
     return (
-        <View>
+        <SafeAreaView style={{ flex: 1, position: "relative" }}>
             <Text>TextScreen</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
