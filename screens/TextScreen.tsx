@@ -50,7 +50,7 @@ const TextScreen = () => {
                         display: "flex", flexDirection: "row", alignItems: "center", marginBottom: 10,
                         justifyContent: "space-between"
                     }}>
-                        <Text style={{ color: "white", fontFamily: "Montserrat-Medium", fontSize: 16 }}>Form</Text>
+                        <Text style={{ color: "white", fontFamily: "Montserrat-Medium", fontSize: 16 }}>Send Message Form</Text>
                         <TouchableOpacity
                         // onPress={() => setShowModalAdd(!showModalAdd)}
                         >
