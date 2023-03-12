@@ -14,6 +14,7 @@ import PhotoScreen from './screens/PhotoScreen';
 import CalculatorScreen from './screens/Calculator';
 import TextScreen from './screens/TextScreen';
 import NotificationScreen from './screens/NotificationScreen';
+import SplashScreen from 'react-native-splash-screen';
 
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,6 +35,10 @@ function App() {
 
   React.useEffect(() => {
     createChannel()
+  }, [])
+
+  React.useEffect(() => {
+    SplashScreen.hide();
   }, [])
 
   return (

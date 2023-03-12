@@ -23,12 +23,12 @@ const CalculatorScreen = () => {
                 <View>
                     <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>Please enter the first number</Text>
                 </View>
-                <View style={{ marginTop: 5 }}>
+                <View style={{ marginTop: 8 }}>
                     <Input
                         // value={calculatedPrice}
                         placeholder="Write any text"
                         placeholderTextColor={"#4b4d4f"}
-                        // keyboardType={"number-pad"}
+                        keyboardType={"number-pad"}
                         // onChangeText={nextText => {
                         //     setCalculatedPrice(nextText)
                         // }}
@@ -41,12 +41,12 @@ const CalculatorScreen = () => {
                 <View>
                     <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>Please enter the second number</Text>
                 </View>
-                <View style={{ marginTop: 5 }}>
+                <View style={{ marginTop: 8 }}>
                     <Input
                         // value={calculatedPrice}
                         placeholder="Write any text"
                         placeholderTextColor={"#4b4d4f"}
-                        // keyboardType={"number-pad"}
+                        keyboardType={"number-pad"}
                         // onChangeText={nextText => {
                         //     setCalculatedPrice(nextText)
                         // }}
@@ -54,6 +54,9 @@ const CalculatorScreen = () => {
                         status={"control"}
                     />
                 </View>
+            </View>
+            <View>
+                <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", marginTop: 15 }}>Please select an operation</Text>
             </View>
             <SelectList
                 inputStyles={{ color: "white" }}
@@ -78,7 +81,7 @@ const CalculatorScreen = () => {
                         tintColor: "white",
                     }} />}
                 dropdownStyles={{ borderRadius: 5, }}
-                boxStyles={{ borderRadius: 5, marginTop: 15 }}
+                boxStyles={{ borderRadius: 5, marginTop: 10 }}
                 setSelected={(val: React.SetStateAction<string>) => setSelected(val)}
                 data={data}
                 dropdownTextStyles={{ color: "white" }}
@@ -95,7 +98,7 @@ const CalculatorScreen = () => {
 
             <View style={{ marginTop: 20, display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
                 <Text style={{ color: "white", fontSize: 14, fontFamily: "Montserrat-Medium", flex: 1 }}>The result of your operation is: </Text>
-                <Text style={{ color: "white", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine:"underline" }}>15</Text>
+                <Text style={{ color: "white", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }}>15</Text>
             </View>
         </SafeAreaView>
     )
