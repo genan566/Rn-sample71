@@ -175,7 +175,6 @@ function App() {
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
                     }} />
-                    // <IconMaterial name="event" size={} color={color} />
                   )
                 }}
               />
@@ -195,7 +194,6 @@ function App() {
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
                     }} />
-                    // <IconMaterial name="event" size={} color={color} />
                   )
                 }}
               />
@@ -215,7 +213,6 @@ function App() {
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
                     }} />
-                    // <IconMaterial name="event" size={} color={color} />
                   )
                 }}
               />
@@ -230,38 +227,14 @@ function App() {
                   },
                   headerShown: false,
                   tabBarIcon: ({ focused, color, size }) => (
-                    <Icon name="rocket"
-                      // style={{
-                      //   width: focused ? 25 : 20,
-                      //   height: focused ? 25 : 20,
-                      // }}
-                      size={30}
-                      color={focused ? "#38b2ac" : "white"}
-                    />
-                    // <IconMaterial name="event" size={ } color={color} />
+                    <UiKittenIcon name="smartphone-outline" style={{
+                      width: focused ? 25 : 20,
+                      height: focused ? 25 : 20,
+                      tintColor: focused ? "#38b2ac" : "white",
+                    }} />
                   )
                 }}
               />
-
-              {/* <Tab.Screen
-          name={"Mes Ordres"}
-          component={MyOrders}
-          options={{
-            tabBarLabelStyle: {
-              fontSize: 11.3,
-              fontFamily: "Montserrat-SemiBold",
-            },
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => (
-              <UiKittenIcon name="list" style={{
-                width: focused ? 25 : 20,
-                height: focused ? 25 : 20,
-                tintColor: focused ? "#38b2ac" : "white",
-              }} />
-              // <IconMaterial name="event" size={} color={color} />
-            )
-          }}
-        /> */}
             </Tab.Navigator>
           </NavigationContainer>
         </ApplicationProvider>

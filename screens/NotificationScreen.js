@@ -20,7 +20,7 @@ const NotificationScreen = () => {
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#1a202c", paddingVertical: 5 }}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <Image
                     source={require('../images/logo.png')}
                     style={{ width: 50, height: 50, alignSelf: "center" }} />

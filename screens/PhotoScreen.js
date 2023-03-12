@@ -1,4 +1,4 @@
-import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native"
 import React from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
@@ -143,77 +143,83 @@ const PhotoScreen = () => {
                 source={require('../images/logo.png')}
                 style={{ width: 50, height: 50, alignSelf: "center" }} />
 
-            <View style={{ height: HEIGHT * .35, borderColor: "rgba(255,255,255,.2)", overflow: "hidden", borderWidth: 1, width: "100%", marginBottom: 10, borderRadius: 5 }}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={{ marginTop: 15, marginBottom: 20 }}>
+                    <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>There you can upload, update image and send it to Firebase storage</Text>
+                </View>
+
+                <View style={{ height: HEIGHT * .35, borderColor: "rgba(255,255,255,.2)", overflow: "hidden", borderWidth: 1, width: "100%", marginBottom: 10, borderRadius: 5 }}>
 
 
-                {
-                    photo ? <View>
-                        <Image
-                            source={photo}
-                            // resizeMode="contain"
-                            style={{ width: "100%", height: "100%" }} />
-                    </View> : <Image
-                        source={require('../images/34.png')}
-                        style={{ width: "100%", height: "100%", alignSelf: "center" }} />
-                }
-            </View>
+                    {
+                        photo ? <View>
+                            <Image
+                                source={photo}
+                                // resizeMode="contain"
+                                style={{ width: "100%", height: "100%" }} />
+                        </View> : <Image
+                            source={require('../images/34.png')}
+                            style={{ width: "100%", height: "100%", alignSelf: "center" }} />
+                    }
+                </View>
 
-            <Text style={{
-                color: "rgb(255,255,255)", marginBottom: 25,
-                textAlign: "center", fontSize: 14
-            }}>There you can upload image and send it to firebase store</Text>
+                <Text style={{
+                    color: "rgb(255,255,255)", marginBottom: 25,
+                    textAlign: "center", fontSize: 14
+                }}>There you can upload image and send it to firebase store</Text>
 
-            <View style={{ display: "flex", gap: 10, marginTop: 20, flexDirection: "row" }}>
-                <TouchableOpacity onPress={() => loadCamera()}
-                    style={{
-                        flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                        backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
-                    }}>
+                <View style={{ display: "flex", gap: 10, marginTop: 20, flexDirection: "row" }}>
+                    <TouchableOpacity onPress={() => loadCamera()}
+                        style={{
+                            flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+                            backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
+                        }}>
+                        {
+                            loadingCamera ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
+                                <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
+                        }
+                        <Text style={{ color: "white", marginLeft: 5 }}>Open Camera</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => loadGallery()}
+                        style={{
+                            flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+                            backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
+                        }}>
+                        {
+                            loadingGallery ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
+                                <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
+                        }
+                        <Text style={{ color: "white", marginLeft: 5 }}>Open Gallery</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ position: "relative", marginTop: 15, overflow: "hidden" }}>
+                    <TouchableOpacity onPress={() => deployment()}
+                        style={{
+                            paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
+                        }}>
+                        {
+                            loadingSendToFirebase && <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} />
+                        }
+                        {
+                            !loadingSendToFirebase ? <Text style={{ color: "white" }}>{Object.keys(lastMpeg).length !== 0 ? "Update image on firebase" : "Send to firebase"}</Text> :
+                                <Text style={{ color: "white" }}>Uploading image to firestore...</Text>
+                        }
+                        {
+                            !loadingSendToFirebase && <Icon name="navigation-2-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
+                        }
+                    </TouchableOpacity>
                     {
-                        loadingCamera ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
-                            <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
+                        loadingSendToFirebase || Object.keys(mpeg).length === 0 &&
+                        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
                     }
-                    <Text style={{ color: "white", marginLeft: 5 }}>Open Camera</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => loadGallery()}
-                    style={{
-                        flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                        backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
-                    }}>
-                    {
-                        loadingGallery ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
-                            <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
-                    }
-                    <Text style={{ color: "white", marginLeft: 5 }}>Open Gallery</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={{ position: "relative", marginTop: 15, overflow: "hidden" }}>
-                <TouchableOpacity onPress={() => deployment()}
-                    style={{
-                        paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                        backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
-                    }}>
-                    {
-                        loadingSendToFirebase && <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} />
-                    }
-                    {
-                        !loadingSendToFirebase ? <Text style={{ color: "white" }}>{Object.keys(lastMpeg).length !== 0 ? "Update image on firebase" : "Send to firebase"}</Text> :
-                            <Text style={{ color: "white" }}>Uploading image to firestore...</Text>
-                    }
-                    {
-                        !loadingSendToFirebase && <Icon name="navigation-2-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
-                    }
-                </TouchableOpacity>
-                {
-                    loadingSendToFirebase || Object.keys(mpeg).length === 0 &&
-                    <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
-                }
 
-                {
-                    loadingSendToFirebase &&
-                    <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
-                }
-            </View>
+                    {
+                        loadingSendToFirebase &&
+                        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
+                    }
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
