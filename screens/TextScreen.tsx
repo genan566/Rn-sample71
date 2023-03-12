@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Input } from "@ui-kitten/components";
+import { Icon as Ico, Input } from "@ui-kitten/components";
 import { SafeAreaView, TouchableOpacity, View } from "react-native"
 import { Text } from "react-native"
 import database from '@react-native-firebase/database';
@@ -54,7 +54,7 @@ const TextScreen = () => {
                         <TouchableOpacity
                         // onPress={() => setShowModalAdd(!showModalAdd)}
                         >
-                            <Icon name="close"
+                            <Ico name="close"
                                 style={{
                                     width: 20,
                                     height: 20,

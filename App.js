@@ -7,8 +7,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import * as eva from '@eva-design/eva';
 import PushNotification from "react-native-push-notification";
-import { ApplicationProvider, Icon, IconRegistry } from '@ui-kitten/components';
-import IconAwesome5 from 'react-native-vector-icons/FontAwesome';
+import { ApplicationProvider, Icon as UiKittenIcon, IconRegistry } from '@ui-kitten/components';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import PhotoScreen from './screens/PhotoScreen';
 import CalculatorScreen from './screens/Calculator';
@@ -88,7 +88,7 @@ function App() {
               // setShowModal(false)
             }}
           >
-            <Icon name="close"
+            <UiKittenIcon name="close"
               style={{
                 width: 15,
                 height: 15,
@@ -170,7 +170,7 @@ function App() {
                   },
                   headerShown: false,
                   tabBarIcon: ({ focused, color, size }) => (
-                    <Icon name="bell-outline" style={{
+                    <UiKittenIcon name="bell-outline" style={{
                       width: focused ? 25 : 20,
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
@@ -190,7 +190,7 @@ function App() {
                   },
                   headerShown: false,
                   tabBarIcon: ({ focused, color, size }) => (
-                    <Icon name="camera" style={{
+                    <UiKittenIcon name="camera" style={{
                       width: focused ? 25 : 20,
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
@@ -210,7 +210,7 @@ function App() {
                   },
                   headerShown: false,
                   tabBarIcon: ({ focused, color, size }) => (
-                    <Icon name="file-text-outline" style={{
+                    <UiKittenIcon name="file-text-outline" style={{
                       width: focused ? 25 : 20,
                       height: focused ? 25 : 20,
                       tintColor: focused ? "#38b2ac" : "white",
@@ -230,7 +230,7 @@ function App() {
                   },
                   headerShown: false,
                   tabBarIcon: ({ focused, color, size }) => (
-                    <IconAwesome5 name="rocket"
+                    <Icon name="rocket"
                       // style={{
                       //   width: focused ? 25 : 20,
                       //   height: focused ? 25 : 20,
@@ -253,7 +253,7 @@ function App() {
             },
             headerShown: false,
             tabBarIcon: ({ focused, color, size }) => (
-              <Icon name="list" style={{
+              <UiKittenIcon name="list" style={{
                 width: focused ? 25 : 20,
                 height: focused ? 25 : 20,
                 tintColor: focused ? "#38b2ac" : "white",
