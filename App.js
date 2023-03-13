@@ -1,5 +1,5 @@
 import { View, Text, Pressable, SafeAreaView, Dimensions, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
@@ -19,10 +19,13 @@ import SplashScreen from 'react-native-splash-screen';
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 import Toast, { BaseToast, BaseToastProps, ErrorToast } from 'react-native-toast-message';
-import { LoginContextProvider } from './contexts/LoginContext';
+import { LoginContext, LoginContextProvider } from './contexts/LoginContext';
+import { createStackNavigator } from '@react-navigation/stack';
+import CustomStack from './Stacks/SIGNIN';
+import { Provider, useSelector } from 'react-redux';
+import store from './redux/store';
+import SUPPORTAPP from './Stacks/SUPPORTAPP';
 const Drawer = createDrawerNavigator();
-const Tab = createBottomTabNavigator();
-
 // const Tab = createMaterialTopTabNavigator();
 
 function App() {
@@ -124,125 +127,21 @@ function App() {
     SplashScreen.hide();
   }, [])
 
-  const renderTabs = () => {
-    return (
 
-      <Tab.Navigator
-        initialRouteName='Notification'
 
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: "#1a202c",
-            borderColor: "transparent",
-            borderWidth: 0,
-            borderTopColor: "transparent",
-          },
 
-          // showLabel: false,
-          tabBarShowLabel: false,
+  const { frame, onChange } = useContext(LoginContext);
+  React.useEffect(() => {
+    console.log("frame: ", frame?.mail)
+  }, [frame])
 
-        }}
-      >
-
-        <Tab.Screen
-          name={"Notification"}
-          component={NotificationScreen}
-          // options={{
-
-          // }}
-
-          options={{
-            tabBarLabelStyle: {
-              fontSize: 11.3,
-              fontFamily: "Montserrat-SemiBold",
-            },
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => (
-              <UiKittenIcon name="bell-outline" style={{
-                width: focused ? 25 : 20,
-                height: focused ? 25 : 20,
-                tintColor: focused ? "#38b2ac" : "white",
-              }} />
-            )
-          }}
-        />
-
-        <Tab.Screen
-          name={"Photo"}
-          component={PhotoScreen}
-          options={{
-            tabBarLabelStyle: {
-              fontSize: 11.3,
-              fontFamily: "Montserrat-SemiBold",
-            },
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => (
-              <UiKittenIcon name="camera" style={{
-                width: focused ? 25 : 20,
-                height: focused ? 25 : 20,
-                tintColor: focused ? "#38b2ac" : "white",
-              }} />
-            )
-          }}
-        />
-
-        <Tab.Screen
-          name={"Text"}
-          component={TextScreen}
-          options={{
-            tabBarLabelStyle: {
-              fontSize: 11.3,
-              fontFamily: "Montserrat-SemiBold",
-            },
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => (
-              <UiKittenIcon name="file-text-outline" style={{
-                width: focused ? 25 : 20,
-                height: focused ? 25 : 20,
-                tintColor: focused ? "#38b2ac" : "white",
-              }} />
-            )
-          }}
-        />
-
-        <Tab.Screen
-          name={"Calculator"}
-          component={CalculatorScreen}
-          options={{
-            tabBarLabelStyle: {
-              fontSize: 11.3,
-              fontFamily: "Montserrat-SemiBold",
-            },
-            headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => (
-              <UiKittenIcon name="smartphone-outline" style={{
-                width: focused ? 25 : 20,
-                height: focused ? 25 : 20,
-                tintColor: focused ? "#38b2ac" : "white",
-              }} />
-            )
-          }}
-        />
-      </Tab.Navigator>
-    )
-  }
 
   return (
     <>
-      <LoginContextProvider>
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a202c" }}>
 
-          <IconRegistry icons={EvaIconsPack} />
-          <ApplicationProvider {...eva} theme={eva.light}>
-            <NavigationContainer>
-            </NavigationContainer>
-          </ApplicationProvider>
-        </SafeAreaView>
-
-        <Toast
-          topOffset={10}
-          config={toastConfig} />
-      </LoginContextProvider>
+      <Provider store={store}>
+        <SUPPORTAPP />
+      </Provider>
     </>
 
   );

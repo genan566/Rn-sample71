@@ -85,7 +85,7 @@ const CalculatorScreen = () => {
                     <View style={{ marginTop: 8 }}>
                         <Input
                             value={firstNumber}
-                            placeholder="Write any text"
+                            placeholder="Write any number"
                             placeholderTextColor={"#4b4d4f"}
                             keyboardType={"number-pad"}
                             onChangeText={nextText => {
@@ -103,7 +103,7 @@ const CalculatorScreen = () => {
                     <View style={{ marginTop: 8 }}>
                         <Input
                             value={secondNumber}
-                            placeholder="Write any text"
+                            placeholder="Write any number"
                             placeholderTextColor={"#4b4d4f"}
                             keyboardType={"number-pad"}
                             onChangeText={nextText => {
