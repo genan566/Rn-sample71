@@ -96,7 +96,7 @@ const TextScreen = () => {
                     </TouchableOpacity>
                 </View>
                 {
-                    Object.keys(data).map(val => {
+                    data !== null && Object.keys(data).map(val => {
                         return (
                             <View
                                 key={val}
@@ -145,6 +145,30 @@ const TextScreen = () => {
                             </View>
                         )
                     })
+                }
+                {
+                    data === null && <>
+                        <View style={{
+                            alignItems: "center", justifyContent: "center", overflow: "hidden", marginBottom: 10, borderRadius: 10, marginTop: 20,
+                            width: 100,
+                            height: 100,
+                            alignSelf: "center"
+                        }}>
+                            <Image
+                                style={{
+                                    width: 100,
+                                    height: 100,
+                                    // borderRadius: WIDTH * .5
+                                }}
+                                resizeMode="contain"
+                                source={require("../images/notFound.png")}
+                            />
+                        </View>
+                        <Text style={{
+                            color: "white", fontSize: 14, fontFamily: "Montserrat-Medium",
+                            flex: 1, alignSelf: "center", textAlign: "center"
+                        }}>No Data to display now</Text>
+                    </>
                 }
             </ScrollView>
             {
