@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { Component } from "react";
+import ForgotPassword from "../screens/ForgotPassword";
 import Signin from "../screens/Signin";
 
 const RegistrationStack = createStackNavigator();
@@ -16,8 +17,8 @@ class CustomStack extends Component {
                 initialRouteName={'SignIn'}
             >
                 <RegistrationStack.Screen name="SignIn" component={Signin} />
-                {/* <RegistrationStack.Screen name="SignUp" component={SignUp} />
-          <RegistrationStack.Screen name="ForgotPassword" component={ForgotPassword} /> */}
+                {/* {/* <RegistrationStack.Screen name="SignUp" component={SignUp} /> */}
+                <RegistrationStack.Screen name="ForgotPassword" component={ForgotPassword} />
             </RegistrationStack.Navigator>
         )
     }

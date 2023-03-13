@@ -172,7 +172,7 @@ const PhotoScreen = () => {
                     <TouchableOpacity onPress={() => loadCamera()}
                         style={{
                             flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
+                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
                         }}>
                         {
                             loadingCamera ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
@@ -183,7 +183,7 @@ const PhotoScreen = () => {
                     <TouchableOpacity onPress={() => loadGallery()}
                         style={{
                             flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#38b2ac", alignItems: "center", justifyContent: "center",
+                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
                         }}>
                         {
                             loadingGallery ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :

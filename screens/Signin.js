@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
 
-const Signin = () => {
+const Signin = ({ navigation }) => {
     function ValidateEmail(input) {
 
         var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -197,6 +197,21 @@ const Signin = () => {
                         />
                     </View>
 
+                    <View style={{ marginTop: 10 }}>
+                        <TouchableOpacity
+                            activeOpacity={.7}
+                            onPress={() => navigation.navigate("ForgotPassword")}
+                            style={{
+                                backgroundColor: "transparent", display: "flex", alignItems: "center",
+                                justifyContent: "center"
+                                , paddingHorizontal: 10, borderRadius: 5
+                            }}>
+                            <Text style={{
+                                fontFamily: "Montserrat-Medium", color: "#6434eb"
+                            }}>Forgot Password?</Text>
+                        </TouchableOpacity>
+                    </View>
+
 
 
                     <View style={{ marginHorizontal: 20, marginTop: 15 }}>
@@ -224,12 +239,15 @@ const Signin = () => {
                     </View>
 
                     <View style={{ marginBottom: 10, paddingHorizontal: 20, marginTop: 15 }}>
-                        <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 10, marginBottom: 0 }}>The password should contain a minimum length of 8 characters</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 10, marginBottom: 0 }}>The password should contain at least one uppercase letter</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 10, marginBottom: 0 }}>The password should contain at least one lowercase letter</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 10, marginBottom: 0 }}>The password should contain at least one number digit</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 10, marginBottom: 0 }}>The password should contain at least one special character</Text>
+                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain a minimum length of 8 characters</Text>
+                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one uppercase letter</Text>
+                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one lowercase letter</Text>
+                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one number digit</Text>
+                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one special character</Text>
                     </View>
+
+
+                    <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>@Copyright all right reserved-2023@</Text>
                 </Animatable.View>
                 <View style={{ marginBottom: 50 }} />
             </ScrollView>

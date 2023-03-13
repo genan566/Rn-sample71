@@ -45,7 +45,7 @@ const RenderTabs = () => {
                         <UiKittenIcon name="bell-outline" style={{
                             width: focused ? 25 : 20,
                             height: focused ? 25 : 20,
-                            tintColor: focused ? "#38b2ac" : "white",
+                            tintColor: focused ? "#6434eb" : "white",
                         }} />
                     )
                 }}
@@ -64,7 +64,7 @@ const RenderTabs = () => {
                         <UiKittenIcon name="camera" style={{
                             width: focused ? 25 : 20,
                             height: focused ? 25 : 20,
-                            tintColor: focused ? "#38b2ac" : "white",
+                            tintColor: focused ? "#6434eb" : "white",
                         }} />
                     )
                 }}
@@ -83,7 +83,7 @@ const RenderTabs = () => {
                         <UiKittenIcon name="file-text-outline" style={{
                             width: focused ? 25 : 20,
                             height: focused ? 25 : 20,
-                            tintColor: focused ? "#38b2ac" : "white",
+                            tintColor: focused ? "#6434eb" : "white",
                         }} />
                     )
                 }}
@@ -102,7 +102,7 @@ const RenderTabs = () => {
                         <UiKittenIcon name="smartphone-outline" style={{
                             width: focused ? 25 : 20,
                             height: focused ? 25 : 20,
-                            tintColor: focused ? "#38b2ac" : "white",
+                            tintColor: focused ? "#6434eb" : "white",
                         }} />
                     )
                 }}

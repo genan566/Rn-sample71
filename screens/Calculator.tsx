@@ -177,7 +177,7 @@ const CalculatorScreen = () => {
                 {
                     !loadSendRequestToBackend && responseData && <View style={{ marginTop: 20, display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={{ color: "white", fontSize: 14, fontFamily: "Montserrat-Medium", flex: 1 }}>The result of your operation is: </Text>
-                        <Text style={{ color: "white", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }}>{responseData.toFixed(2)}</Text>
+                        <Text style={{ color: "#6434eb", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }}>{responseData.toFixed(2)}</Text>
                     </View>
                 }
                 <View style={{ marginBottom: 20 }} />
