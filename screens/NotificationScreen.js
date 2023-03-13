@@ -20,6 +20,27 @@ const NotificationScreen = () => {
     }
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#1a202c", paddingVertical: 5 }}>
+
+            <View style={{
+                height: HEIGHT * .38,
+                width: HEIGHT * .38,
+                borderRadius: HEIGHT * .38,
+                backgroundColor: "rgba(254,254,254,.08)",
+                position: "absolute",
+                top: -HEIGHT * .25,
+                left: WIDTH * .25,
+                zIndex: -2.5
+            }} />
+            <View style={{
+                height: HEIGHT * .42,
+                width: HEIGHT * .42,
+                borderRadius: HEIGHT * .42,
+                backgroundColor: "rgba(254,254,254,.1)",
+                position: "absolute",
+                top: -HEIGHT * .1,
+                right: -WIDTH * .49,
+                zIndex: -1.5
+            }} />
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Image
                     source={require('../images/logo.png')}
@@ -63,7 +84,7 @@ const NotificationScreen = () => {
                             name="bell-outline" />
                     </TouchableOpacity>
                 </View>
-                <View style={{height:WIDTH * .05}} />
+                <View style={{ height: WIDTH * .05 }} />
             </ScrollView>
         </SafeAreaView>
     )
