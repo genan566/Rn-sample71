@@ -1,11 +1,8 @@
-import { ActivityIndicator, Dimensions, Image, Pressable, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Dimensions, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import React from 'react'
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
-import IconTo from 'react-native-vector-icons/FontAwesome';
-const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
-import { utils } from '@react-native-firebase/app';
 import { Icon } from "@ui-kitten/components";
 import Toast from "react-native-toast-message";
 
@@ -17,10 +14,6 @@ const PhotoScreen = () => {
     const [loadingGallery, setLoadingGallery] = React.useState(false)
     const [loadingSendToFirebase, setloadingSendToFirebase] = React.useState('')
 
-
-    // React.useEffect(() => {
-    //     console.log("photo", photo)
-    // }, [photo])
 
     const loadCamera = () => {
         setLoadingCamera(true);
@@ -34,15 +27,12 @@ const PhotoScreen = () => {
         setTimeout(() => {
             launchCamera(options, (res) => {
                 if (res.didCancel) {
-                    console.log("Cancelled")
                     setLoadingCamera(false);
                 } else if (res.errorCode) {
-                    console.log("Error Code: " + res.errorCode)
                     setLoadingCamera(false);
                 }
                 else {
                     const source = { uri: res.assets[0].uri }
-                    console.log(source)
                     setMpeg(res.assets[0])
                     setPhoto(source)
                     setLoadingCamera(false);
@@ -63,31 +53,25 @@ const PhotoScreen = () => {
         setTimeout(() => {
             launchImageLibrary(options, (res) => {
                 if (res.didCancel) {
-                    console.log("Cancelled")
                     setLoadingGallery(false);
                 } else if (res.errorCode) {
-                    console.log("Error Code: " + res.errorCode)
                     setLoadingGallery(false);
                 }
 
                 else {
                     const source = { uri: res.assets[0].uri }
-                    console.log(source)
                     setMpeg(res.assets[0])
                     setPhoto(source)
                     setLoadingGallery(false);
-                    // console.log("assertPhoto", res.assets[0].uri)
                 }
             });
         }, 1000)
     }
 
-    const deployment = async () => {
+    const sendIMGToFirebase = async () => {
         setloadingSendToFirebase(true)
         if (Object.keys(lastMpeg).length !== 0) {
-            console.log("111")
             const storageRef = storage().ref(`/uploads/${lastMpeg?.fileName}`);
-            // await storageRef.putFile(mpeg?.uri.replace("file://", ""));
             const response = await fetch(mpeg?.uri);
             const blob = await response.blob();
             storageRef.put(blob).then(() => {
@@ -109,7 +93,6 @@ const PhotoScreen = () => {
             })
         }
         else {
-            console.log("000")
             const reference = storage().ref(`/uploads/${mpeg?.fileName}`);
 
             setLastMpeg(mpeg)
@@ -130,7 +113,6 @@ const PhotoScreen = () => {
                     props: { state: 'error' }
                 });
             })
-            // console.log(mpeg)
         }
 
     }
@@ -145,21 +127,20 @@ const PhotoScreen = () => {
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={{ marginTop: 15, marginBottom: 20 }}>
-                    <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>There you can upload, update image and send it to Firebase storage</Text>
+                    <Text style={styles.helperText}>There you can upload, update image and send it to Firebase storage</Text>
                 </View>
 
-                <View style={{ height: HEIGHT * .35, borderColor: "rgba(255,255,255,.2)", overflow: "hidden", borderWidth: 1, width: "100%", marginBottom: 10, borderRadius: 5 }}>
+                <View style={styles.imgContainer}>
 
 
                     {
                         photo ? <View>
                             <Image
                                 source={photo}
-                                // resizeMode="contain"
                                 style={{ width: "100%", height: "100%" }} />
                         </View> : <Image
                             source={require('../images/34.png')}
-                            style={{ width: "100%", height: "100%", alignSelf: "center" }} />
+                            style={styles.imgD} />
                     }
                 </View>
 
@@ -170,10 +151,7 @@ const PhotoScreen = () => {
 
                 <View style={{ display: "flex", gap: 10, marginTop: 20, flexDirection: "row" }}>
                     <TouchableOpacity onPress={() => loadCamera()}
-                        style={{
-                            flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
-                        }}>
+                        style={styles.actionBtn}>
                         {
                             loadingCamera ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
                                 <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
@@ -181,10 +159,7 @@ const PhotoScreen = () => {
                         <Text style={{ color: "white", marginLeft: 5 }}>Open Camera</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => loadGallery()}
-                        style={{
-                            flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
-                        }}>
+                        style={styles.actionBtn}>
                         {
                             loadingGallery ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
                                 <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
@@ -193,30 +168,31 @@ const PhotoScreen = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={{ position: "relative", marginTop: 15, overflow: "hidden" }}>
-                    <TouchableOpacity onPress={() => deployment()}
-                        style={{
-                            paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
-                        }}>
+                    <TouchableOpacity onPress={() => sendIMGToFirebase()}
+                        style={styles.btn}>
                         {
                             loadingSendToFirebase && <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} />
                         }
                         {
-                            !loadingSendToFirebase ? <Text style={{ color: "white" }}>{Object.keys(lastMpeg).length !== 0 ? "Update image on firebase" : "Send to firebase"}</Text> :
+                            !loadingSendToFirebase ? <Text
+                                style={{ color: "white" }}>{Object.keys(lastMpeg).length !== 0 ?
+                                    "Update image on firebase" : "Send to firebase"}</Text> :
                                 <Text style={{ color: "white" }}>Uploading image to firestore...</Text>
                         }
                         {
-                            !loadingSendToFirebase && <Icon name="navigation-2-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
+                            !loadingSendToFirebase && <Icon
+                                name="navigation-2-outline"
+                                style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
                         }
                     </TouchableOpacity>
                     {
                         loadingSendToFirebase || Object.keys(mpeg).length === 0 &&
-                        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
+                        <View style={styles.disabledView} />
                     }
 
                     {
                         loadingSendToFirebase &&
-                        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
+                        <View style={styles.disabledView} />
                     }
                 </View>
             </ScrollView>
@@ -225,3 +201,24 @@ const PhotoScreen = () => {
 }
 
 export default PhotoScreen
+
+const styles = StyleSheet.create({
+    disabledView: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" },
+    btn: {
+        paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+        backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
+    },
+    actionBtn: {
+        flex: 1, paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+        backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
+    },
+    helperText: {
+        color: "white", fontSize: 12,
+        fontFamily: "Montserrat-Medium",
+    },
+    imgD: { width: "100%", height: "100%", alignSelf: "center" },
+    imgContainer: {
+        height: HEIGHT * .35, borderColor: "rgba(255,255,255,.2)", overflow: "hidden",
+        borderWidth: 1, width: "100%", marginBottom: 10, borderRadius: 5
+    }
+})

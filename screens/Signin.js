@@ -8,6 +8,7 @@ import * as Animatable from 'react-native-animatable';
 import { Icon, Input } from "@ui-kitten/components";
 import { userAsyncThunc } from "../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
+import { StyleSheet } from "react-native";
 
 const WIDTH = Dimensions.get("screen").width;
 const HEIGHT = Dimensions.get("screen").height;
@@ -94,8 +95,6 @@ const Signin = ({ navigation }) => {
 
     const validate_Login = () => {
         setloadingOnSignin(true)
-        // if (ValidateEmail())
-        // dispatch(userAsyncThunc({ name: "Jean", mail: "ABO" }))
         let checker = checkPasswordStrength(password)
         console.log(checker)
         if ((checker === "Weak")) {
@@ -119,7 +118,7 @@ const Signin = ({ navigation }) => {
             return;
         }
 
-        dispatch(userAsyncThunc({ name: "Jean", mail: "ABO" }))
+        dispatch(userAsyncThunc({ name: "AnonymUserInstance", mail: email }))
         setloadingOnSignin(false)
     }
 
@@ -169,13 +168,11 @@ const Signin = ({ navigation }) => {
                         </View>
                         <Input
                             value={email}
-                            // value={this.state.name}
+
                             placeholder="Enter your mail"
                             placeholderTextColor={"rgba(255,255,255,.2)"}
                             status={"control"}
                             accessoryRight={<Icon style={{ with: 10, height: 10 }} name="email" />}
-                            // accessoryRight={this.renderUser}
-                            // onChangeText={nextValue => this.setState({ name: nextValue })}
                             onChangeText={nextValue => setemail(nextValue)}
                             style={{ backgroundColor: "transparent", flex: 1 }}
                         />
@@ -239,15 +236,15 @@ const Signin = ({ navigation }) => {
                     </View>
 
                     <View style={{ marginBottom: 10, paddingHorizontal: 20, marginTop: 15 }}>
-                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain a minimum length of 8 characters</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one uppercase letter</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one lowercase letter</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one number digit</Text>
-                        <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>The password should contain at least one special character</Text>
+                        <Text style={styles.helperText}>The password should contain a minimum length of 8 characters</Text>
+                        <Text style={styles.helperText}>The password should contain at least one uppercase letter</Text>
+                        <Text style={styles.helperText}>The password should contain at least one lowercase letter</Text>
+                        <Text style={styles.helperText}>The password should contain at least one number digit</Text>
+                        <Text style={styles.helperText}>The password should contain at least one special character</Text>
                     </View>
 
 
-                    <Text style={{ color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }}>@Copyright all right reserved-2023@</Text>
+                    <Text style={styles.helperText}>@Copyright all right reserved-2023@</Text>
                 </Animatable.View>
                 <View style={{ marginBottom: 50 }} />
             </ScrollView>
@@ -256,3 +253,7 @@ const Signin = ({ navigation }) => {
 }
 
 export default Signin
+
+const styles = StyleSheet.create({
+    helperText: { color: "rgba(255,255,255,.5)", textAlign: "center", fontSize: 10, marginBottom: 0 }
+})

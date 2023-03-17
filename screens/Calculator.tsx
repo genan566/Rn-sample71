@@ -1,6 +1,6 @@
 import { Icon, Input } from "@ui-kitten/components";
 import React from "react";
-import { ActivityIndicator, Image, SafeAreaView, ScrollView, TouchableOpacity, View } from "react-native"
+import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { Text } from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
 
@@ -60,27 +60,19 @@ const CalculatorScreen = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a202c", position: "relative", padding: 10 }}>
+        <SafeAreaView style={styles.root}>
             <Image
                 source={require('../images/logo.png')}
-                style={{ width: 50, height: 50, alignSelf: "center" }} />
+                style={styles.logo} />
 
             <ScrollView showsVerticalScrollIndicator={false}>
 
-                {/* <View>
-                    <Text style={{
-                        color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", marginTop: 5, borderRadius: 50, paddingHorizontal: 15,
-                        backgroundColor: "#6434eb", textAlign: "center", alignSelf: "center", padding: 5
-                    }}>Calculate</Text>
-                </View> */}
-
-
                 <View style={{ marginTop: 15 }}>
-                    <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>There you have to enter two inputs and we automatically calculate the value to you from our API</Text>
+                    <Text style={styles.explicitText}>There you have to enter two inputs and we automatically calculate the value to you from our API</Text>
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <View>
-                        <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>Please enter the first number</Text>
+                        <Text style={styles.label1}>Please enter the first number</Text>
                     </View>
                     <View style={{ marginTop: 8 }}>
                         <Input
@@ -98,7 +90,7 @@ const CalculatorScreen = () => {
                 </View>
                 <View style={{ marginTop: 10 }}>
                     <View>
-                        <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>Please enter the second number</Text>
+                        <Text style={styles.label2}>Please enter the second number</Text>
                     </View>
                     <View style={{ marginTop: 8 }}>
                         <Input
@@ -115,7 +107,7 @@ const CalculatorScreen = () => {
                     </View>
                 </View>
                 <View>
-                    <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", marginTop: 15 }}>Please select an operation</Text>
+                    <Text style={styles.labelSelect}>Please select an operation</Text>
                 </View>
                 <SelectList
                     inputStyles={{ color: "white" }}
@@ -152,32 +144,34 @@ const CalculatorScreen = () => {
                     <TouchableOpacity onPress={() => {
                         requestCalculateData()
                     }}
-                        style={{
-                            paddingVertical: 10, borderRadius: 5, flexDirection: "row",
-                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
-                        }}>
+                        style={styles.btnCalculate}>
                         {
-                            loadSendRequestToBackend && <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} />
+                            loadSendRequestToBackend && <ActivityIndicator
+                                color={"white"}
+                                style={{ marginRight: 5 }}
+                                size={17} />
                         }
                         {
                             !loadSendRequestToBackend ? <Text style={{ color: "white" }}>Calculate</Text> :
                                 <Text style={{ color: "white" }}>Requesting...</Text>
                         }
                         {
-                            !loadSendRequestToBackend && <Icon name="smartphone-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
+                            !loadSendRequestToBackend && <Icon
+                                name="smartphone-outline"
+                                style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
                         }
                     </TouchableOpacity>
 
                     {
                         (loadSendRequestToBackend || firstNumber.length === 0 || secondNumber.length === 0) &&
-                        <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
+                        <View style={styles.absoluteDisabler} />
                     }
                 </View>
 
                 {
                     !loadSendRequestToBackend && responseData && <View style={{ marginTop: 20, display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
                         <Text style={{ color: "white", fontSize: 14, fontFamily: "Montserrat-Medium", flex: 1 }}>The result of your operation is: </Text>
-                        <Text style={{ color: "#6434eb", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }}>{responseData.toFixed(2)}</Text>
+                        <Text style={styles.resultText}>{responseData.toFixed(2)}</Text>
                     </View>
                 }
                 <View style={{ marginBottom: 20 }} />
@@ -187,3 +181,19 @@ const CalculatorScreen = () => {
 }
 
 export default CalculatorScreen
+
+const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: "#1a202c", position: "relative", padding: 10 },
+    logo: { width: 50, height: 50, alignSelf: "center" },
+    explicitText: { color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", },
+    label1: { color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", },
+    label2: { color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", },
+    labelSelect: { color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", marginTop: 15 },
+    btnCalculate: {
+        paddingVertical: 10, borderRadius: 5, flexDirection: "row",
+        backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
+    },
+    absoluteDisabler: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" },
+    resultText:{ color: "#6434eb", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }
+
+})

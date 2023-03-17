@@ -17,7 +17,6 @@ class CustomStack extends Component {
                 initialRouteName={'SignIn'}
             >
                 <RegistrationStack.Screen name="SignIn" component={Signin} />
-                {/* {/* <RegistrationStack.Screen name="SignUp" component={SignUp} /> */}
                 <RegistrationStack.Screen name="ForgotPassword" component={ForgotPassword} />
             </RegistrationStack.Navigator>
         )

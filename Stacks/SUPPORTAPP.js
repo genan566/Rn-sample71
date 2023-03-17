@@ -105,7 +105,8 @@ const SUPPORTAPP = ({ children }) => {
                 <ApplicationProvider {...eva} theme={eva.light}>
                     <NavigationContainer>
                         {
-                            !userSelector?.mail ? <CustomStack /> : <RenderTabs />
+                            !userSelector?.mail ? <CustomStack />
+                                : <RenderTabs />
                         }
                     </NavigationContainer>
                 </ApplicationProvider>
