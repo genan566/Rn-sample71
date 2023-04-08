@@ -66,10 +66,14 @@ const TextScreen = () => {
             });
     }
 
-    React.useEffect(() => {
+    const realtimeGetData = () => {
         database()
             .ref('/messaging/')
             .on('value', snapshot => setdata(snapshot.val()))
+    }
+
+    React.useEffect(() => {
+        realtimeGetData()
     }, [])
 
     return (
@@ -77,22 +81,37 @@ const TextScreen = () => {
             <Image
                 source={require('../images/logo.png')}
                 style={{ width: 50, height: 50, alignSelf: "center" }} />
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 10, }}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingHorizontal: 10, }}>
 
                 <View style={{ marginTop: 15, marginBottom: 20 }}>
-                    <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat-Medium", }}>There you can send text message on real time</Text>
+                    <Text style={{
+                        color: "white", fontSize: 12,
+                        fontFamily: "Montserrat-Medium",
+                    }}>There you can send text message on real time</Text>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "flex-start", marginBottom: 10 }}>
+                <View style={{
+                    flexDirection: "row", alignItems: "center",
+                    justifyContent: "flex-start", marginBottom: 10
+                }}>
                     <TouchableOpacity onPress={() => {
                         setCalculatedPrice("")
                         setmodalsAddingMessage(true)
                     }}
                         style={{
-                            paddingVertical: 10, borderRadius: 5, flexDirection: "row", paddingHorizontal: 10,
-                            backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
+                            paddingVertical: 10, borderRadius: 5,
+                            flexDirection: "row", paddingHorizontal: 10,
+                            backgroundColor: "#6434eb",
+                            alignItems: "center", justifyContent: "center",
                         }}>
                         <Text style={{ color: "white" }}>Create Message</Text>
-                        <Ico name="message-square-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
+                        <Ico
+                            name="message-square-outline"
+                            style={{
+                                width: 15, height: 15,
+                                tintColor: "white", marginLeft: 5
+                            }} />
                     </TouchableOpacity>
                 </View>
                 {
@@ -101,8 +120,10 @@ const TextScreen = () => {
                             <View
                                 key={val}
                                 style={{
-                                    borderColor: "white", borderWidth: 1, flexDirection: "row", alignItems: "center", justifyContent: "space-between",
-                                    borderRadius: 5, paddingVertical: 10, marginBottom: 10, paddingHorizontal: 10
+                                    borderColor: "white", borderWidth: 1, flexDirection: "row",
+                                    alignItems: "center", justifyContent: "space-between",
+                                    borderRadius: 5, paddingVertical: 10,
+                                    marginBottom: 10, paddingHorizontal: 10
                                 }}>
                                 <View style={{ flex: 1 }}>
                                     <Text style={{ color: "rgba(255,255,255,.2)", fontSize: 12 }}
@@ -113,7 +134,8 @@ const TextScreen = () => {
                                 </View>
                                 <TouchableOpacity style={{
                                     width: 25, height: 25, justifyContent: "center",
-                                    alignItems: "center", backgroundColor: "white", borderRadius: 100, marginRight: 5
+                                    alignItems: "center", backgroundColor: "white",
+                                    borderRadius: 100, marginRight: 5
                                 }}
                                     onPress={() => {
                                         setmodalsAddingMessage(true)
@@ -147,9 +169,11 @@ const TextScreen = () => {
                     })
                 }
                 {
-                    data === null && <>
+                    data.length === 0 && <>
                         <View style={{
-                            alignItems: "center", justifyContent: "center", overflow: "hidden", marginBottom: 10, borderRadius: 10, marginTop: 20,
+                            alignItems: "center", justifyContent: "center",
+                            overflow: "hidden", marginBottom: 10,
+                            borderRadius: 10, marginTop: 20,
                             width: 100,
                             height: 100,
                             alignSelf: "center"
@@ -165,8 +189,10 @@ const TextScreen = () => {
                             />
                         </View>
                         <Text style={{
-                            color: "white", fontSize: 14, fontFamily: "Montserrat-Medium",
-                            flex: 1, alignSelf: "center", textAlign: "center"
+                            color: "white", fontSize: 14,
+                            fontFamily: "Montserrat-Medium",
+                            flex: 1, alignSelf: "center",
+                            textAlign: "center"
                         }}>No Data to display now</Text>
                     </>
                 }
@@ -184,12 +210,20 @@ const TextScreen = () => {
                         // delay={0}
                         // easing={"ease-out"}
                         animation={"slideInDown"}
-                        style={{ padding: 20, backgroundColor: "#1a202c", borderRadius: 5, position: "relative" }}>
+                        style={{
+                            padding: 20, backgroundColor: "#1a202c",
+                            borderRadius: 5, position: "relative"
+                        }}>
                         <View style={{
-                            display: "flex", flexDirection: "row", alignItems: "center", marginBottom: 20,
+                            display: "flex", flexDirection: "row",
+                            alignItems: "center", marginBottom: 20,
                             justifyContent: "space-between"
                         }}>
-                            <Text style={{ color: "white", fontFamily: "Montserrat-Medium", fontSize: 16 }}>Send Message Form</Text>
+                            <Text
+                                style={{
+                                    color: "white",
+                                    fontFamily: "Montserrat-Medium", fontSize: 16
+                                }}>Send Message Form</Text>
                             <TouchableOpacity style={{ backgroundColor: "white", borderRadius: 100, padding: 1.5 }}
                                 onPress={() => setmodalsAddingMessage(!modalsAddingMessage)}
                             >
@@ -203,7 +237,11 @@ const TextScreen = () => {
                         </View>
                         <View>
                             <View>
-                                <Text style={{ color: "rgba(255,255,255,.5)", fontSize: 12, fontFamily: "Montserrat-Medium", }}>Please write any text</Text>
+                                <Text
+                                    style={{
+                                        color: "rgba(255,255,255,.5)", fontSize: 12,
+                                        fontFamily: "Montserrat-Medium",
+                                    }}>Please write any text</Text>
                             </View>
                             <View style={{ marginTop: 8 }}>
                                 <Input
@@ -233,20 +271,27 @@ const TextScreen = () => {
                                     backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
                                 }}>
                                 {
-                                    loadingSendToFirebase && <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} />
+                                    loadingSendToFirebase && <ActivityIndicator
+                                        color={"white"} style={{ marginRight: 5 }} size={17} />
                                 }
                                 {
-                                    !loadingSendToFirebase ? <Text style={{ color: "white" }}>Send to Firestore</Text> :
+                                    !loadingSendToFirebase ? <Text
+                                        style={{ color: "white" }}>Send to Firestore</Text> :
                                         <Text style={{ color: "white" }}>Loading...</Text>
                                 }
                                 {
-                                    !loadingSendToFirebase && <Ico name="navigation-2-outline" style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
+                                    !loadingSendToFirebase && <Ico
+                                        name="navigation-2-outline"
+                                        style={{ width: 15, height: 15, tintColor: "white", marginLeft: 5 }} />
                                 }
                             </TouchableOpacity>
 
                             {
                                 loadingSendToFirebase || calculatedPrice.length === 0 &&
-                                <View style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" }} />
+                                <View style={{
+                                    position: "absolute", top: 0, left: 0, right: 0,
+                                    bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)"
+                                }} />
                             }
                         </View>
                     </Animatable.View>

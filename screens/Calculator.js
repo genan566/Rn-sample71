@@ -3,6 +3,7 @@ import React from "react";
 import { ActivityIndicator, Image, SafeAreaView, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native"
 import { Text } from "react-native"
 import { SelectList } from "react-native-dropdown-select-list";
+import RangeSlider from 'react-native-range-slider'
 
 const CalculatorScreen = () => {
 
@@ -20,7 +21,7 @@ const CalculatorScreen = () => {
         { key: '4', value: 'Division /' },
     ]
 
-    const calculate = async (data: any) => {
+    const calculate = async (data) => {
         return fetch(
             "https://genan566.pythonanywhere.com/api/v1/myview/",
             {
@@ -104,6 +105,20 @@ const CalculatorScreen = () => {
                             style={{ backgroundColor: "transparent", fontSize: 8 }}
                             status={"control"}
                         />
+                        {/* <RangeSlider
+                            minValue={0}
+                            maxValue={100}
+                            tintColor={'#da0f22'}
+                            handleBorderWidth={1}
+                            handleBorderColor="#454d55"
+                            selectedMinimum={20}
+                            selectedMaximum={40}
+                            style={{
+                                flex: 1, height: 70,
+                                padding: 10, backgroundColor: '#ddd'
+                            }}
+                            onChange={(data) => { console.log(data); }}
+                        /> */}
                     </View>
                 </View>
                 <View>
@@ -134,7 +149,7 @@ const CalculatorScreen = () => {
                     defaultOption={{ key: '1', value: 'Addition +' }}
                     dropdownStyles={{ borderRadius: 5, }}
                     boxStyles={{ borderRadius: 5, marginTop: 10 }}
-                    setSelected={(val: React.SetStateAction<string>) => setSelected(val)}
+                    setSelected={(val) => setSelected(val)}
                     data={data}
                     dropdownTextStyles={{ color: "white" }}
                     fontFamily='lato'
@@ -169,8 +184,8 @@ const CalculatorScreen = () => {
                 </View>
 
                 {
-                    !loadSendRequestToBackend && responseData && <View style={{ marginTop: 20, display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "space-between" }}>
-                        <Text style={{ color: "white", fontSize: 14, fontFamily: "Montserrat-Medium", flex: 1 }}>The result of your operation is: </Text>
+                    !loadSendRequestToBackend && responseData && <View style={styles.resultContainer}>
+                        <Text style={styles.resultLabel}>The result of your operation is: </Text>
                         <Text style={styles.resultText}>{responseData.toFixed(2)}</Text>
                     </View>
                 }
@@ -194,6 +209,8 @@ const styles = StyleSheet.create({
         backgroundColor: "#6434eb", alignItems: "center", justifyContent: "center",
     },
     absoluteDisabler: { position: "absolute", top: 0, left: 0, right: 0, bottom: 0, zIndex: 1, backgroundColor: "rgba(10,10,10,.5)" },
-    resultText:{ color: "#6434eb", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" }
+    resultText: { color: "#6434eb", fontSize: 18, fontFamily: "Montserrat-Medium", textDecorationLine: "underline" },
+    resultContainer: { marginTop: 20, display: "flex", alignItems: "center", flexDirection: "row", justifyContent: "space-between" },
+    resultLabel: { color: "white", fontSize: 14, fontFamily: "Montserrat-Medium", flex: 1 }
 
 })

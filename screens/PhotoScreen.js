@@ -118,7 +118,7 @@ const PhotoScreen = () => {
     }
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a202c", paddingHorizontal: 15 }}>
+        <SafeAreaView style={styles.root}>
 
 
             <Image
@@ -144,21 +144,21 @@ const PhotoScreen = () => {
                     }
                 </View>
 
-                <Text style={{
-                    color: "rgb(255,255,255)", marginBottom: 25,
-                    textAlign: "center", fontSize: 14
-                }}>There you can upload image and send it to firebase store</Text>
+                <Text style={styles.explicitText}>There you can upload image and send it to firebase store</Text>
 
-                <View style={{ display: "flex", gap: 10, marginTop: 20, flexDirection: "row" }}>
-                    <TouchableOpacity onPress={() => loadCamera()}
+                <View style={styles.btnContainer}>
+                    <TouchableOpacity
+                        onPress={() => loadCamera()}
                         style={styles.actionBtn}>
                         {
-                            loadingCamera ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
+                            loadingCamera ?
+                                <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
                                 <Icon name="camera" style={{ width: 15, height: 15, tintColor: "white" }} />
                         }
                         <Text style={{ color: "white", marginLeft: 5 }}>Open Camera</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => loadGallery()}
+                    <TouchableOpacity
+                        onPress={() => loadGallery()}
                         style={styles.actionBtn}>
                         {
                             loadingGallery ? <ActivityIndicator color={"white"} style={{ marginRight: 5 }} size={17} /> :
@@ -220,5 +220,11 @@ const styles = StyleSheet.create({
     imgContainer: {
         height: HEIGHT * .35, borderColor: "rgba(255,255,255,.2)", overflow: "hidden",
         borderWidth: 1, width: "100%", marginBottom: 10, borderRadius: 5
-    }
+    },
+    root: { flex: 1, backgroundColor: "#1a202c", paddingHorizontal: 15 },
+    explicitText: {
+        color: "rgb(255,255,255)", marginBottom: 25,
+        textAlign: "center", fontSize: 14
+    },
+    btnContainer: { display: "flex", gap: 10, marginTop: 20, flexDirection: "row" }
 })
